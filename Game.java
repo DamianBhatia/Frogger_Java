@@ -18,10 +18,14 @@ public class Game extends Canvas implements Runnable {
   
   private Random random;
   
+  private TileMap tileMap;
+  
   //Constructor
   public Game() {
     handler = new Handler();
     random = new Random();
+    tileMap = new TileMap("gameMap.txt", 32);
+    
     this.addKeyListener(new KeyInput(handler));
     
     new Window(WIDTH, HEIGHT, "Frogger", this);    
@@ -106,6 +110,9 @@ public class Game extends Canvas implements Runnable {
     g.setColor(Color.BLACK);
     g.fillRect(0,0,WIDTH,HEIGHT);
     
+    //Renders map background
+    tileMap.render(g);
+    //Renders all entities
     handler.render(g);
     
     //Gets rid of pen to prevent errors

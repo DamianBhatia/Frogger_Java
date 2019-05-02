@@ -29,7 +29,7 @@ public class Car extends GameObject {
   }
   
   public void render(Graphics g) {
-    g.setColor(Color.RED);
+    g.setColor(Color.BLACK);
     g.fillRect(x, y, 64, 32);
   }
   
