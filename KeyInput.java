@@ -20,8 +20,8 @@ public class KeyInput extends KeyAdapter {
       if(tempObject.getID() == ID.Player){
         if(key == KeyEvent.VK_UP) tempObject.setSpeedY(-5);
         if(key == KeyEvent.VK_DOWN) tempObject.setSpeedY(5);
-        if(key == KeyEvent.VK_LEFT) tempObject.setSpeedY(-5);
-        if(key == KeyEvent.VK_RIGHT) tempObject.setSpeedY(5);
+        if(key == KeyEvent.VK_LEFT) tempObject.setSpeedX(-5);
+        if(key == KeyEvent.VK_RIGHT) tempObject.setSpeedX(5);
       }
     }
   }

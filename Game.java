@@ -2,11 +2,12 @@ import java.awt.Canvas;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.util.Random;
 
 public class Game extends Canvas implements Runnable {
   
   //Constants for dimensions of frame
-  private static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
+  public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
   
   //Dealing with Threads
   private Thread thread;
@@ -15,15 +16,23 @@ public class Game extends Canvas implements Runnable {
   //Creates object Handler
   private Handler handler;
   
+  private Random random;
+  
   //Constructor
   public Game() {
     handler = new Handler();
+    random = new Random();
     this.addKeyListener(new KeyInput(handler));
     
     new Window(WIDTH, HEIGHT, "Frogger", this);    
     
-    //Adding players to game
-    handler.addObject(new Player(WIDTH/2-32, HEIGHT/2-32, ID.Player));
+    //Adding player to game
+    handler.addObject(new Player(WIDTH/2-32, HEIGHT, ID.Player));
+    
+    //Adding cars to game
+    for(int i = 0; i < 8; i++) {
+    handler.addObject(new Car(0, random.nextInt(400), ID.Car));
+    }
   }
   
   //Called from window class and starts the thread
@@ -103,6 +112,16 @@ public class Game extends Canvas implements Runnable {
     //Puts buffer screen in queue to be displayed
     g.dispose();
     bs.show();
+  }
+  
+  //Keep GameObject within screen boundaries
+  public static int clamp(int var, int min, int max) {
+    if(var >= max)
+      return var = max;
+    else if(var <= min)
+      return var = min;
+    else
+      return var;
   }
   
   public static void main(String args[]) {
